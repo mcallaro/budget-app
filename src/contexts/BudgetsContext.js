@@ -20,7 +20,7 @@ export const BudgetProvider = ({ children }) => {
 
   const addBudget = ({ name, max }) => {
     setBudgets((prevBudgets) => {
-      if (prevBudgets.find(budget => budget.name === name)) {
+      if (prevBudgets.find((budget) => budget.name === name)) {
         return prevBudgets;
       }
 
@@ -29,9 +29,14 @@ export const BudgetProvider = ({ children }) => {
   };
 
   const deleteBudget = ({ id }) => {
-    // TODO: Deal with expenses being categorized
-    setBudgets(prevBudgets => {
-      return prevBudgets.filter(budget => budget.id !== id);
+    setExpenses((prevExpenses) => {
+      return prevExpenses.map((expense) => {
+        if (expense.budgetId !== id) return expense;
+        return { ...expense, budgetId: uncategorizedBudgetId };
+      });
+    });
+    setBudgets((prevBudgets) => {
+      return prevBudgets.filter((budget) => budget.id !== id);
     });
   };
 
@@ -42,8 +47,8 @@ export const BudgetProvider = ({ children }) => {
   };
 
   const deleteExpense = ({ id }) => {
-    setExpenses(prevExpenses => {
-      return prevExpenses.filter(expense => expense.id !== id);
+    setExpenses((prevExpenses) => {
+      return prevExpenses.filter((expense) => expense.id !== id);
     });
   };
 
