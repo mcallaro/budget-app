@@ -1,5 +1,6 @@
 {
   "name": "budget-app",
+  "homepage": "https://mcallaro.github.io/budget-app/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
